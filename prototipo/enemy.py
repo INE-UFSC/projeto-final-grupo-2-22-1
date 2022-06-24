@@ -10,10 +10,7 @@ class Enemy(pygame.sprite.Sprite):
         self.image = pygame.image.load("arquivos/enemy.png")
         self.image = pygame.transform.scale(self.image, [20, 50])
         self.rect = self.image.get_rect()
-
         self.timer = 0
-
-
 
     def update(self,*args):
     # Comandos
