@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite): # classe Player herda de pygame.sprite.Sprit
         elif keys[pygame.K_w]:
             self.rect.y -= 3
 
-        # lógica para personagem não sair do limite da tela
+        # lógica para jogador não sair do limite da tela
         if self.rect.top < 40:
             self.rect.top = 40
         elif self.rect.bottom > 728:
