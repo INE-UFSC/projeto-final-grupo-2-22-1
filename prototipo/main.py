@@ -37,8 +37,13 @@ barraArmamento = font.render("Aqui os armamentos", True, (255, 255, 255), (0, 0,
 barraArmamentoRect = barraArmamento.get_rect()
 barraArmamentoRect.center = (512, 748)
 
+font = pygame.font.Font('freesansbold.ttf', 18)
+porta = font.render("next map", True, (255, 255, 255), (0, 0, 0))
+portaRect = porta.get_rect()
+portaRect.center = (980, 400)
+
 # Draw
-def draw_window(current_map):
+def draw_window(current_map): # lógica para criação do map
     display.fill(BLACK)
     for y in range(len(current_map)):
         for x in range(len(current_map[y])):
@@ -46,8 +51,9 @@ def draw_window(current_map):
                 rect1 = pygame.Rect(x * 32, y * 32, 32, 32)
                 pygame.draw.rect(display, GREEN, rect1)
 
-    display.blit(barraVida, barraVidaRect)
+    display.blit(barraVida, barraVidaRect), (barraArmamento, barraArmamentoRect) 
     display.blit(barraArmamento, barraArmamentoRect)
+    display.blit(porta, portaRect)
     objectGroup.draw(display)  # desenha os sprites            
 
 #FPS

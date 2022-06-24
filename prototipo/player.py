@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite): # classe Player herda de pygame.sprite.Sprit
         super().__init__(*groups)
         self.image = pygame.image.load("arquivos/careca.png")  # carregando a imagem
         self.rect = pygame.Rect(0, 740, 20, 50)  # retangulo do player (posição x, y, altura, largura)
-
+        
     def update(self, *args):
         # lógica
         keys = pygame.key.get_pressed() #keys recebe eventos teclas precionadas
