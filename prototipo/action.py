@@ -9,7 +9,7 @@ class Disparo(pygame.sprite.Sprite):
         self.speed = 10
 
     def update(self,*args):
-    # Comandos
+    # comandos
          self.rect.x += self.speed
          if self.rect.left > 1100:
             self.kill()
