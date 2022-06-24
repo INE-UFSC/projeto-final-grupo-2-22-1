@@ -6,7 +6,7 @@ class Disparo(pygame.sprite.Sprite):
 
         self.image = pygame.image.load("arquivos/tiro.png")
         self.rect = self.image.get_rect()
-        self.speed = 1
+        self.speed = 10
 
     def update(self,*args):
     # Comandos

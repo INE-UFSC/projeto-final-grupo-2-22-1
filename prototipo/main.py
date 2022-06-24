@@ -6,7 +6,7 @@ from map import map1
 
 
 BLACK = (46, 46, 46)
-VERDE = (0, 128, 0)
+GREEN = (0, 128, 0)
 
 # iniciar pygame
 pygame.init()
@@ -44,16 +44,21 @@ def draw_window(current_map):
         for x in range(len(current_map[y])):
             if current_map[y][x] == "X":
                 rect1 = pygame.Rect(x * 32, y * 32, 32, 32)
-                pygame.draw.rect(display, VERDE, rect1)
+                pygame.draw.rect(display, GREEN, rect1)
 
     display.blit(barraVida, barraVidaRect)
     display.blit(barraArmamento, barraArmamentoRect)
     objectGroup.draw(display)  # desenha os sprites            
 
+#FPS
+clock = pygame.time.Clock()
+FPS = 120
+
 # Main
 def main():
     gameLoop = True
     while gameLoop:
+        clock.tick(FPS) # método tick, força gameLoop a rodar em FPS atribuido
         # eventos de mouse ou teclado
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

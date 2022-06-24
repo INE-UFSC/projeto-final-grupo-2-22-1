@@ -12,13 +12,13 @@ class Player(pygame.sprite.Sprite): # classe Player herda de pygame.sprite.Sprit
 
         # movimentação
         if keys[pygame.K_d]:
-            self.rect.x += 1
+            self.rect.x += 3
         elif keys[pygame.K_a]:
-            self.rect.x -= 1
+            self.rect.x -= 3
         elif keys[pygame.K_s]:
-            self.rect.y += 1
+            self.rect.y += 3
         elif keys[pygame.K_w]:
-            self.rect.y -= 1
+            self.rect.y -= 3
 
         # lógica para personagem não sair do limite da tela
         if self.rect.top < 40:

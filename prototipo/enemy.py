@@ -17,5 +17,5 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self,*args):
     # Comandos
-        self.timer += 0.0003
+        self.timer += 0.003
         self.rect.x = 512 + math.sin(self.timer) * 350
