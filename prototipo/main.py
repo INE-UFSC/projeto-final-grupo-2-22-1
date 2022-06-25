@@ -1,6 +1,5 @@
 import pygame
-from player import Player
-from enemy import Enemy
+from personagens import *
 from action import Disparo
 from map import map1
 
@@ -19,12 +18,27 @@ objectGroup = pygame.sprite.Group()
 actionGroup = pygame.sprite.Group()
 enemyGroup = pygame.sprite.Group()
 
+
+
 # Objetos
-jogador = Player(objectGroup)
-newEnemy0 = Enemy(objectGroup, enemyGroup)
+
+#para testes arma
+gun = Arma()
+pocao = Item()
+
+vida = 100
+dano = 50
+
+
+jogador = Player(100,50,gun,pocao,objectGroup)
+
+newEnemy0 = Enemy(vida, dano, gun ,objectGroup,enemyGroup)
 newEnemy0.rect.center = [812, 584] # posição
-newEnemy1 = Enemy(objectGroup, enemyGroup)
+newEnemy1 = Enemy(vida, dano, gun ,objectGroup,enemyGroup)
 newEnemy1.rect.center = [112, 284]
+
+
+
 
 # barra de vida e barra de armamentos
 font = pygame.font.Font('freesansbold.ttf', 32)

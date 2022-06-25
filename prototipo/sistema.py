@@ -1,3 +1,3 @@
-import jogo
+import main
 
-jogo.loop_principal()
+main.loop_principal()
