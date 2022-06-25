@@ -1,13 +1,8 @@
 import pygame
 import math
+from equipamentos import *
 from abc import ABC, abstractmethod
 
-#classes armas e itens, colocar em outro lugar.
-class Arma:
-    pass
-
-class Item:
-    pass
 
 
 class Personagem(ABC, pygame.sprite.Sprite):
@@ -61,10 +56,11 @@ class Player(Personagem):
 
 
 class Enemy(Personagem):
-    def __init__(self, vida, dano, arma, *groups):
+    def __init__(self, vida, dano, arma, imagem, *groups):
         super().__init__(vida, dano, arma, *groups)
 
-        self.image = pygame.image.load("arquivos/enemy.png")
+        self.image = imagem
+
         self.image = pygame.transform.scale(self.image, [20, 50])
         self.rect = self.image.get_rect()
         self.timer = 0

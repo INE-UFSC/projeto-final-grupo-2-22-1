@@ -1,10 +1,15 @@
 import pygame
+from equipamentos import *
 from personagens import *
 from action import Disparo
 from map import map1
 
 BLACK = (46, 46, 46)
 GREEN = (0, 128, 0)
+
+
+def init():
+    pass
 
 # iniciar pygame
 pygame.init()
@@ -32,9 +37,12 @@ dano = 50
 
 jogador = Player(100,50,gun,pocao,objectGroup)
 
-newEnemy0 = Enemy(vida, dano, gun ,objectGroup,enemyGroup)
+imagem_inimigo = pygame.image.load("arquivos/enemy.png")
+
+
+newEnemy0 = Enemy(vida, dano, gun , imagem_inimigo, objectGroup,enemyGroup)
 newEnemy0.rect.center = [812, 584] # posição
-newEnemy1 = Enemy(vida, dano, gun ,objectGroup,enemyGroup)
+newEnemy1 = Enemy(vida, dano, gun ,imagem_inimigo, objectGroup,enemyGroup)
 newEnemy1.rect.center = [112, 284]
 
 
