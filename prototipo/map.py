@@ -9,7 +9,7 @@ import pygame
 class Block(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
-        self.image = pygame.image.load("prototipo/arquivos/bloco.png")
+        self.image = pygame.image.load("arquivos/bloco.png")
         self.rect = self.image.get_rect()  
 
 
@@ -37,7 +37,7 @@ map1 = [
     'X...XXXXXXXXXX.......XXXXXXX...X',
     'X....................X.........X',
     'X..............................X',
-    'XXXX........................XXXX']
+    'X..............................X']
 
 
 

@@ -5,7 +5,7 @@ import pygame
 class Player(pygame.sprite.Sprite): # classe Player herda de pygame.sprite.Sprite
     def __init__(self, *groups):
         super().__init__(*groups)
-        self.image = pygame.image.load("prototipo/arquivos/careca.png")  # carregando a imagem
+        self.image = pygame.image.load("arquivos/careca.png")  # carregando a imagem
         self.rect = pygame.Rect(40, 680, 20, 50)  # retangulo do player (posição x, y, altura, largura)
         self.velocidadeX = 0
         self.velocidadeY = 0
