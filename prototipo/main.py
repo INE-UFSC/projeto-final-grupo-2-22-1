@@ -1,12 +1,15 @@
 import pygame
-from player import Player
-from enemy import Enemy
+from equipamentos import *
+from personagens import *
 from action import Disparo
-from map import map1
-
+from map import *
 
 BLACK = (46, 46, 46)
 GREEN = (0, 128, 0)
+
+
+def init():
+    pass
 
 # iniciar pygame
 pygame.init()
@@ -19,13 +22,32 @@ pygame.display.set_caption("Jogo do grupo 2")
 objectGroup = pygame.sprite.Group()
 actionGroup = pygame.sprite.Group()
 enemyGroup = pygame.sprite.Group()
+blockGroup = pygame.sprite.Group()
+
+
 
 # Objetos
-jogador = Player(objectGroup)
-newEnemy0 = Enemy(objectGroup, enemyGroup)
+
+#para testes arma
+gun = Arma()
+pocao = Item()
+
+vida = 100
+dano = 50
+
+
+jogador = Player(100,50,gun,pocao,objectGroup)
+
+imagem_inimigo = pygame.image.load("arquivos/enemy.png")
+
+
+newEnemy0 = Enemy(vida, dano, gun , imagem_inimigo, objectGroup,enemyGroup)
 newEnemy0.rect.center = [812, 584] # posição
-newEnemy1 = Enemy(objectGroup, enemyGroup)
+newEnemy1 = Enemy(vida, dano, gun ,imagem_inimigo, objectGroup,enemyGroup)
 newEnemy1.rect.center = [112, 284]
+
+
+
 
 # barra de vida e barra de armamentos
 font = pygame.font.Font('freesansbold.ttf', 32)
@@ -42,51 +64,79 @@ porta = font.render("next map", True, (255, 255, 255), (0, 0, 0))
 portaRect = porta.get_rect()
 portaRect.center = (980, 400)
 
+
 # Draw
-def draw_window(current_map): # lógica para criação do map
-    display.fill(BLACK)
+def draw_window(current_map):  # lógica para criação do map
+
     for y in range(len(current_map)):
         for x in range(len(current_map[y])):
             if current_map[y][x] == "X":
-                rect1 = pygame.Rect(x * 32, y * 32, 32, 32)
-                pygame.draw.rect(display, GREEN, rect1)
+                rect1 = Block(blockGroup)
+                rect1.rect.x = x * 32
+                rect1.rect.y = y * 32
 
-    display.blit(barraVida, barraVidaRect), (barraArmamento, barraArmamentoRect) 
-    display.blit(barraArmamento, barraArmamentoRect)
-    display.blit(porta, portaRect)
-    objectGroup.draw(display)  # desenha os sprites            
+draw_window(map1)
 
 #FPS
 clock = pygame.time.Clock()
 FPS = 120
 
 # Main
-def main():
+def loop_principal():
     gameLoop = True
     while gameLoop:
-        clock.tick(FPS) # método tick, força gameLoop a rodar em FPS atribuido
+        clock.tick(FPS)  # método tick, força gameLoop a rodar em FPS atribuido
         # eventos de mouse ou teclado
         for event in pygame.event.get():
+
+
             if event.type == pygame.QUIT:
                 gameLoop = False
-            elif event.type == pygame.KEYDOWN:
+
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     novoDisparo = Disparo(objectGroup, actionGroup)
-                    novoDisparo.rect.center = jogador.rect.center # disparo saindo do centro do player        
+                    novoDisparo.rect.center = jogador.rect.center
+
+                if event.key == pygame.K_d:
+                    jogador.mover_direita()
+
+                if event.key == pygame.K_a:
+                    jogador.mover_esquerda()
+
+                if event.key == pygame.K_w:
+                    jogador.mover_cima()
+
+                if event.key == pygame.K_s:
+                    jogador.mover_baixo()
+
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_d or event.key == pygame.K_a:
+                    jogador.parar_horizontal()
+                if event.key == pygame.K_w or event.key == pygame.K_s:
+                    jogador.parar_vertical()
 
         # colliding
         pygame.sprite.groupcollide(actionGroup, enemyGroup, True, True)  # colisão entre tiro e inimigo
         collisionPlayerEnemy = pygame.sprite.spritecollide(jogador, enemyGroup, False, pygame.sprite.collide_mask) # colisão entre jogador e inimigo
+
         if collisionPlayerEnemy:
             print("Game Over")
             gameLoop = False
 
+        jogador.teste_colisao(blockGroup)
+
+
         # draw
-        draw_window(map1)
+        display.fill(BLACK)
+        display.blit(barraVida, barraVidaRect), (barraArmamento, barraArmamentoRect)
+        display.blit(barraArmamento, barraArmamentoRect)
+        display.blit(porta, portaRect)
+        objectGroup.draw(display)
+        blockGroup.draw(display)  # desenha os sprites
 
         # update
         objectGroup.update()
         pygame.display.update()
 
-if __name__ == '__main__':
-    main()
