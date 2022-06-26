@@ -1,5 +1,6 @@
 import pygame
 import math
+import main
 from equipamentos import *
 from abc import ABC, abstractmethod
 
@@ -17,8 +18,32 @@ class Personagem(ABC, pygame.sprite.Sprite):
     def update(self):
         pass
 
-    def tomar_dano(self,qtdade_dano):
-        self.__vida -= qtdade_dano
+    @property
+    def vida(self):
+        return self.__vida
+    @vida.setter
+    def vida(self,vida):
+        self.__vida = vida
+
+    @property
+    def dano(self):
+        return self.__dano
+    @dano.setter
+    def dano(self,dano):
+        self.__dano = dano
+
+    @property
+    def arma(self):
+        return self.__arma
+    @arma.setter
+    def arma(self, arma):
+        return self.__arma
+
+
+
+
+    def tomar_dano(self, qtdade_dano):
+        self.__vida = self.__vida - qtdade_dano
 
 
 
@@ -33,6 +58,18 @@ class Player(Personagem):
         self.velocidadeX = 0
         self.velocidadeY = 0
         self.intencao_pos = list(self.rect.center)
+
+        #print(self.__vida)   #Erro aqui "AttributeError: 'Player' object has no attribute 'vida'"
+
+
+    def tomar_dano(self,qtdade_dano):
+
+        self.vida -= qtdade_dano
+        if self.vida <= 0:
+            main.menu_defeat()
+
+
+
 
     def update(self, *args):
         self.intencao_pos[0] += self.velocidadeX
@@ -95,6 +132,7 @@ class Enemy(Personagem):
         self.image = pygame.transform.scale(self.image, [20, 50])
         self.rect = self.image.get_rect()
         self.timer = 0
+
 
     def update(self,*args):
     # Comandos

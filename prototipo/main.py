@@ -124,8 +124,11 @@ def loop_principal():
         collisionPlayerEnemy = pygame.sprite.spritecollide(jogador, enemyGroup, False, pygame.sprite.collide_mask) # colisão entre jogador e inimigo
 
         if collisionPlayerEnemy:
-            print("Game Over")
-            gameLoop = False
+            if  0 >= (jogador.vida - 50):    #Gambiarra pra n ficar indo num loop infinito
+                gameLoop = False
+
+            jogador.tomar_dano(50)
+
 
         jogador.teste_colisao(blockGroup)
 
@@ -151,6 +154,7 @@ def menu_defeat():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 defeat_loop = False
+
 
         display.fill(BLACK)
         font = pygame.font.Font('freesansbold.ttf', 72)
