@@ -17,6 +17,10 @@ class Personagem(ABC, pygame.sprite.Sprite):
     def update(self):
         pass
 
+    def tomar_dano(self,qtdade_dano):
+        self.__vida -= qtdade_dano
+
+
 
 
 class Player(Personagem):
