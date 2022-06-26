@@ -2,6 +2,7 @@ import pygame
 from player import Player
 from enemy import Enemy
 from action import Disparo
+from map import Block
 from map import map1
 
 
@@ -19,6 +20,7 @@ pygame.display.set_caption("Jogo do grupo 2")
 objectGroup = pygame.sprite.Group()
 actionGroup = pygame.sprite.Group()
 enemyGroup = pygame.sprite.Group()
+blockGroup = pygame.sprite.Group()
 
 # Objetos
 jogador = Player(objectGroup)
@@ -44,17 +46,15 @@ portaRect.center = (980, 400)
 
 # Draw
 def draw_window(current_map): # lógica para criação do map
-    display.fill(BLACK)
+
     for y in range(len(current_map)):
         for x in range(len(current_map[y])):
             if current_map[y][x] == "X":
-                rect1 = pygame.Rect(x * 32, y * 32, 32, 32)
-                pygame.draw.rect(display, GREEN, rect1)
-
-    display.blit(barraVida, barraVidaRect), (barraArmamento, barraArmamentoRect) 
-    display.blit(barraArmamento, barraArmamentoRect)
-    display.blit(porta, portaRect)
-    objectGroup.draw(display)  # desenha os sprites            
+                rect1 = Block(blockGroup)
+                rect1.rect.x = x *32
+                rect1.rect.y = y *32
+ 
+draw_window(map1)               
 
 #FPS
 clock = pygame.time.Clock()
@@ -67,24 +67,58 @@ def main():
         clock.tick(FPS) # método tick, força gameLoop a rodar em FPS atribuido
         # eventos de mouse ou teclado
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 gameLoop = False
-            elif event.type == pygame.KEYDOWN:
+
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     novoDisparo = Disparo(objectGroup, actionGroup)
-                    novoDisparo.rect.center = jogador.rect.center # disparo saindo do centro do player        
+                    novoDisparo.rect.center = jogador.rect.center 
+    
+                if event.key == pygame.K_d:
+                    jogador.mover_direita()
+                if event.key == pygame.K_a:
+                    jogador.mover_esquerda()
+                if event.key == pygame.K_w:
+                    jogador.mover_cima()
+                if event.key == pygame.K_s:
+                    jogador.mover_baixo()
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_d or event.key == pygame.K_a:
+                    jogador.parar_horizontal()
+                if event.key == pygame.K_w or event.key == pygame.K_s:
+                    jogador.parar_vertical()        
+
+
+
 
         # colliding
-        pygame.sprite.groupcollide(actionGroup, enemyGroup, True, True)  # colisão entre tiro e inimigo
+        pygame.sprite.groupcollide(actionGroup, enemyGroup, True, True)
+        pygame.sprite.groupcollide(actionGroup, blockGroup, True, False)  # colisão entre tiro e inimigo
+        
         collisionPlayerEnemy = pygame.sprite.spritecollide(jogador, enemyGroup, False, pygame.sprite.collide_mask) # colisão entre jogador e inimigo
         if collisionPlayerEnemy:
             print("Game Over")
             gameLoop = False
 
+        jogador.teste_colisao(blockGroup)
+        
+        
+              
+            
         # draw
-        draw_window(map1)
+        display.fill(BLACK)
+        display.blit(barraVida, barraVidaRect), (barraArmamento, barraArmamentoRect) 
+        display.blit(barraArmamento, barraArmamentoRect)
+        display.blit(porta, portaRect)
+        objectGroup.draw(display)
+        blockGroup.draw(display) # desenha os sprites
+        
 
         # update
+        
         objectGroup.update()
         pygame.display.update()
 
