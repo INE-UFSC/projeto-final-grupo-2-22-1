@@ -149,7 +149,7 @@ def loop_principal():
             gameLoop = False
             menu_win()
 
-        print(jogador.rect.centerx, jogador.rect.bottom)
+
 
 
 def menu_defeat():
