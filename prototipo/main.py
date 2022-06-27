@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pygame
 from equipamentos import *
 from personagens import *
@@ -6,6 +7,7 @@ from map import *
 
 BLACK = (46, 46, 46)
 GREEN = (0, 128, 0)
+GRAY = (207,207,196)
 
 
 def init():
@@ -122,8 +124,11 @@ def loop_principal():
         collisionPlayerEnemy = pygame.sprite.spritecollide(jogador, enemyGroup, False, pygame.sprite.collide_mask) # colisão entre jogador e inimigo
 
         if collisionPlayerEnemy:
-            print("Game Over")
-            gameLoop = False
+            if  0 >= (jogador.vida - 50):    #Gambiarra pra n ficar indo num loop infinito
+                gameLoop = False
+
+            jogador.tomar_dano(50)
+
 
         jogador.teste_colisao(blockGroup)
 
@@ -140,3 +145,44 @@ def loop_principal():
         objectGroup.update()
         pygame.display.update()
 
+        if (959 < jogador.rect.centerx < 982) and  (400  < jogador.rect.bottom < 500):
+            gameLoop = False
+            menu_win()
+
+        print(jogador.rect.centerx, jogador.rect.bottom)
+
+
+def menu_defeat():
+    defeat_loop = True
+    while defeat_loop:
+        clock.tick(FPS)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                defeat_loop = False
+
+
+        display.fill(BLACK)
+        font = pygame.font.Font('freesansbold.ttf', 72)
+        defeat_text = font.render("GAME OVER", True, (255, 0, 0))
+        display.blit(defeat_text, (275, 350))
+
+        pygame.display.update()
+
+def menu_win():
+    win_loop = True
+    while win_loop:
+        clock.tick(FPS)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                win_loop = False
+
+
+        display.fill(GRAY)
+
+        font = pygame.font.Font('freesansbold.ttf', 72)
+        win_text = font.render("Você ganhou!", True, (0, 170, 0))
+        display.blit(win_text, (275,350))
+
+        pygame.display.update()
