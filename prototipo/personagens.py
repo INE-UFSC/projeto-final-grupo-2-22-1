@@ -5,12 +5,14 @@ from equipamentos import *
 from abc import ABC, abstractmethod
 
 
+
 class Personagem(ABC, pygame.sprite.Sprite):
     def __init__(self, vida, dano, arma: Arma, *groups):
         super().__init__(*groups)
         self.__vida = vida
         self.__dano = dano
         self.__arma = arma
+
 
     @abstractmethod
     def update(self):
@@ -37,25 +39,37 @@ class Personagem(ABC, pygame.sprite.Sprite):
     def arma(self, arma):
         return self.__arma
 
+
+
+
     def tomar_dano(self, qtdade_dano):
         self.__vida = self.__vida - qtdade_dano
+
+
 
 
 class Player(Personagem):
     def __init__(self,vida ,dano ,arma, item: Item, *groups):
         super().__init__(vida,dano,arma, *groups)
         self.__item = Item
+
         self.image = pygame.image.load("arquivos/careca.png")  # carregando a imagem
         self.rect = pygame.Rect(40, 680, 20, 50)  # retangulo do player (posição x, y, altura, largura)
         self.velocidadeX = 0
         self.velocidadeY = 0
         self.intencao_pos = list(self.rect.center)
 
+        #print(self.__vida)   #Erro aqui "AttributeError: 'Player' object has no attribute 'vida'"
+
 
     def tomar_dano(self,qtdade_dano):
+
         self.vida -= qtdade_dano
         if self.vida <= 0:
             main.menu_defeat()
+
+
+
 
     def update(self, *args):
         self.intencao_pos[0] += self.velocidadeX
@@ -108,13 +122,17 @@ class Player(Personagem):
             self.recusar_movimento()
 
 
+
 class Enemy(Personagem):
-    def __init__(self, vida, dano, arma, *groups):
+    def __init__(self, vida, dano, arma, imagem, *groups):
         super().__init__(vida, dano, arma, *groups)
-        self.image = pygame.image.load("arquivos/enemy.png")
+
+        self.image = imagem
+
         self.image = pygame.transform.scale(self.image, [20, 50])
         self.rect = self.image.get_rect()
         self.timer = 0
+
 
     def update(self,*args):
     # Comandos
