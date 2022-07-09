@@ -1,6 +1,3 @@
--Para executar o jogo abra o Prototipo Grupo 2, que está dentro do Jogo Executável.zip e execute o sistema.exe (Acreditamos que funciona somente em Windows no momento) //  (Ou execute o sistema.py, que está na pasta com o resto dos arquivos python do jogo.)
+Nesse diretório, o grupo irá trabalhar em cima do primeiro protótipo do jogo.
 
-
--O MVP está dentro da pasta GUI, que está junto com os arquivos que estamos usando no GitHub.
-
-           
+A ideia do protótipo não é que ele seja uma versão demo do jogo completo, mas sim que o principal mecanismo do jogo esteja implementado com certo grau de sucesso. Exemplo: em um jogo do tipo plataforma 2D, basta mostrar um retângulo colidindo com objetos e saltando/destruindo com alguma comando do usuário. A interface gráfica (com sprites) é opcional nessa etapa.

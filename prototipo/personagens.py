@@ -1,6 +1,5 @@
 import pygame
 import math
-import main
 from equipamentos import *
 from abc import ABC, abstractmethod
 
@@ -62,11 +61,7 @@ class Player(Personagem):
         #print(self.__vida)   #Erro aqui "AttributeError: 'Player' object has no attribute 'vida'"
 
 
-    def tomar_dano(self,qtdade_dano):
 
-        self.vida -= qtdade_dano
-        if self.vida <= 0:
-            main.menu_defeat()
 
 
 
