@@ -64,20 +64,24 @@ class Player(Personagem):
     def mover_direita(self):
         if self.rect.right < 992:
             self.velocidadeX = 2
+            self.velocidadeY = 0
                    
     def mover_esquerda(self):
         if self.rect.left > 32:
             self.velocidadeX = -2
+            self.velocidadeY = 0
         else:
             self.velocidadeX = 0                
 
     def mover_cima(self):
         if self.rect.top > 40:
             self.velocidadeY = -2
+            self.velocidadeX = 0
             
     def mover_baixo(self):
         if self.rect.bottom < 728:
             self.velocidadeY = 2
+            self.velocidadeX = 0
         else:
             self.velocidadeY = 0 
 

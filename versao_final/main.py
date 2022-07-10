@@ -9,6 +9,7 @@ BLACK = (46, 46, 46)
 GREEN = (0, 128, 0)
 GRAY = (207,207,196)
 ultima_tecla = 'x'
+mapa_atual = 1
 
 def init():
     pass
@@ -25,6 +26,7 @@ objectGroup = pygame.sprite.Group()
 actionGroup = pygame.sprite.Group()
 enemyGroup = pygame.sprite.Group()
 blockGroup = pygame.sprite.Group()
+portaGroup = pygame.sprite.Group()
 
 #para testes arma (em construção)
 gun = Arma()
@@ -49,12 +51,6 @@ barraArmamento = font.render("Aqui os armamentos", True, (255, 255, 255), (0, 0,
 barraArmamentoRect = barraArmamento.get_rect()
 barraArmamentoRect.center = (512, 748)
 
-font = pygame.font.Font('freesansbold.ttf', 18)
-porta = font.render("next map", True, (255, 255, 255), (0, 0, 0))
-portaRect = porta.get_rect()
-portaRect.center = (980, 400)
-
-
 # Draw
 def draw_window(current_map):  # lógica para criação do mapa
     for y in range(len(current_map)):
@@ -63,8 +59,12 @@ def draw_window(current_map):  # lógica para criação do mapa
                 rect1 = Block(blockGroup)
                 rect1.rect.x = x * 32
                 rect1.rect.y = y * 32
+            if current_map[y][x] == "P":
+                rect1 = Porta(portaGroup)
+                rect1.rect.x = x * 32
+                rect1.rect.y = y * 32
 
-draw_window(map1)
+draw_window(map1)                   
 
 #FPS
 clock = pygame.time.Clock()
@@ -87,17 +87,17 @@ def loop_principal():
                     novoDisparo.rect.center = jogador.rect.center
                 if event.key == pygame.K_d:
                     jogador.mover_direita()
-                    ultima_tecla = 'D'
+                    ultima_tecla = 'D'                   
                 if event.key == pygame.K_a:
                     jogador.mover_esquerda()
-                    ultima_tecla = 'A'
+                    ultima_tecla = 'A'                    
                 if event.key == pygame.K_w:
                     jogador.mover_cima()
-                    ultima_tecla = 'W'
+                    ultima_tecla = 'W'                   
                 if event.key == pygame.K_s:
                     jogador.mover_baixo()
-                    ultima_tecla = 'S'            
-
+                    ultima_tecla = 'S'                 
+                 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_d:
                     jogador.velocidadeX = 0
@@ -106,8 +106,8 @@ def loop_principal():
                 if event.key == pygame.K_w:
                     jogador.velocidadeY = 0        
                 if event.key == pygame.K_s:
-                    jogador.velocidadeY = 0              
-
+                    jogador.velocidadeY = 0                                
+            
         # colisões
         if jogador.teste_colisao(blockGroup):
             if ultima_tecla == 'D':
@@ -121,7 +121,7 @@ def loop_principal():
                 jogador.intencao_pos[1] += 2
             if ultima_tecla == 'S':
                 jogador.velocidadeY = 0
-                jogador.intencao_pos[1] -= 2               
+                jogador.intencao_pos[1] -= 2
 
         pygame.sprite.groupcollide(actionGroup, enemyGroup, True, True)  # colisão entre tiro e inimigo
         pygame.sprite.groupcollide(actionGroup, blockGroup, True, False)  # colisão entre tiro e mapa
@@ -132,19 +132,17 @@ def loop_principal():
                 gameLoop = False
             jogador.tomar_dano(50)
 
-
         # draw
         display.fill(BLACK)
         display.blit(barraVida, barraVidaRect), (barraArmamento, barraArmamentoRect)
         display.blit(barraArmamento, barraArmamentoRect)
-        display.blit(porta, portaRect)
+        portaGroup.draw(display)
         objectGroup.draw(display)
         blockGroup.draw(display)  #desenha os sprites do mapa
-
+     
         # update
         objectGroup.update()
         pygame.display.update()
-
 
 def menu_defeat():
     defeat_loop = True
