@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import pygame
 from equipamentos import *
-from personagens import *
+from personagens.player import Player
+from personagens.enemy import Enemy
 from action import Disparo
 from map import *
 
@@ -37,7 +38,7 @@ class Game():
 
         self.jogador = Player(100,50,self.gun,self.pocao,self.object_group)
 
-        self.imagem_inimigo = pygame.image.load("arquivos/enemy.png")
+        self.imagem_inimigo = pygame.image.load("prototipo/arquivos/enemy.png")
 
 
         self.newEnemy0 = Enemy(self.vida, self.dano, self.gun , self.imagem_inimigo, self.object_group,self.enemyGroup)

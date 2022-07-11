@@ -1,6 +1,6 @@
 import pygame
 from equipamentos import *
-from personagem import Personagem
+from personagens.personagem import Personagem
 
 
 class Player(Personagem):

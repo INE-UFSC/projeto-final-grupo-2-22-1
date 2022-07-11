@@ -1,5 +1,5 @@
 import pygame
-from personagem import Personagem
+from personagens.personagem import Personagem
 from equipamentos import *
 import math
 
