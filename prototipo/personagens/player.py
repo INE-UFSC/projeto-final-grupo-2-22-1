@@ -1,50 +1,6 @@
 import pygame
-import math
 from equipamentos import *
-from abc import ABC, abstractmethod
-
-
-
-class Personagem(ABC, pygame.sprite.Sprite):
-    def __init__(self, vida, dano, arma: Arma, *groups):
-        super().__init__(*groups)
-        self.__vida = vida
-        self.__dano = dano
-        self.__arma = arma
-
-
-    @abstractmethod
-    def update(self):
-        pass
-
-    @property
-    def vida(self):
-        return self.__vida
-    @vida.setter
-    def vida(self,vida):
-        self.__vida = vida
-
-    @property
-    def dano(self):
-        return self.__dano
-    @dano.setter
-    def dano(self,dano):
-        self.__dano = dano
-
-    @property
-    def arma(self):
-        return self.__arma
-    @arma.setter
-    def arma(self, arma):
-        return self.__arma
-
-
-
-
-    def tomar_dano(self, qtdade_dano):
-        self.__vida = self.__vida - qtdade_dano
-
-
+from personagem import Personagem
 
 
 class Player(Personagem):
@@ -52,18 +8,13 @@ class Player(Personagem):
         super().__init__(vida,dano,arma, *groups)
         self.__item = Item
 
-        self.image = pygame.image.load("arquivos/careca.png")  # carregando a imagem
+        self.image = pygame.image.load("prototipo/arquivos/careca.png")  # carregando a imagem
         self.rect = pygame.Rect(40, 680, 20, 50)  # retangulo do player (posição x, y, altura, largura)
         self.velocidadeX = 0
         self.velocidadeY = 0
         self.intencao_pos = list(self.rect.center)
 
         #print(self.__vida)   #Erro aqui "AttributeError: 'Player' object has no attribute 'vida'"
-
-
-
-
-
 
 
     def update(self, *args):
@@ -115,22 +66,4 @@ class Player(Personagem):
             self.velocidadeX = 0
             self.velocidadeY = 0
             self.recusar_movimento()
-
-
-
-class Enemy(Personagem):
-    def __init__(self, vida, dano, arma, imagem, *groups):
-        super().__init__(vida, dano, arma, *groups)
-
-        self.image = imagem
-
-        self.image = pygame.transform.scale(self.image, [20, 50])
-        self.rect = self.image.get_rect()
-        self.timer = 0
-
-
-    def update(self,*args):
-    # Comandos
-        self.timer += 0.003
-        self.rect.x = 512 + math.sin(self.timer) * 320
 
