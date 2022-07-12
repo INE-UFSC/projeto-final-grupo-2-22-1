@@ -12,6 +12,7 @@ class Game():
         self.BLACK = (46, 46, 46)
         self.GREEN = (0, 128, 0)
         self.GRAY = (207, 207, 196)
+        self.ultima_tecla = 'x'
 
 
         # iniciar pygame
@@ -26,7 +27,7 @@ class Game():
         self.actionGroup = pygame.sprite.Group()
         self.enemyGroup = pygame.sprite.Group()
         self.blockGroup = pygame.sprite.Group()
-
+        self.portaGroup = pygame.sprite.Group()
 
         self.gun = Arma()
         self.pocao = Item()
@@ -37,7 +38,7 @@ class Game():
 
         self.jogador = Player(100,50,self.gun,self.pocao,self.object_group)
 
-        self.imagem_inimigo = pygame.image.load("arquivos/enemy.png")
+        self.imagem_inimigo = pygame.image.load("prototipo/arquivos/enemy.png")
 
 
         self.newEnemy0 = Enemy(self.vida, self.dano, self.gun , self.imagem_inimigo, self.object_group,self.enemyGroup)
@@ -57,11 +58,6 @@ class Game():
         self.barraArmamentoRect = self.barraArmamento.get_rect()
         self.barraArmamentoRect.center = (512, 748)
 
-        font = pygame.font.Font('freesansbold.ttf', 18)
-        self.porta = font.render("next map", True, (255, 255, 255), (0, 0, 0))
-        self.portaRect = self.porta.get_rect()
-        self.portaRect.center = (980, 400)
-
 
         self.draw_window(map1)
 
@@ -78,8 +74,10 @@ class Game():
                     rect1 = Block(self.blockGroup)
                     rect1.rect.x = x * 32
                     rect1.rect.y = y * 32
-
-
+                if current_map[y][x] == "P":
+                    rect1 = Porta(self.portaGroup)
+                    rect1.rect.x = x * 32
+                    rect1.rect.y = y * 32
 
 
     # Main
@@ -103,29 +101,52 @@ class Game():
 
                     if event.key == pygame.K_d:
                         self.jogador.mover_direita()
-
+                        self.ultima_tecla = 'D'                   
                     if event.key == pygame.K_a:
                         self.jogador.mover_esquerda()
-
+                        self.ultima_tecla = 'A'                    
                     if event.key == pygame.K_w:
                         self.jogador.mover_cima()
-
+                        self.ultima_tecla = 'W'                   
                     if event.key == pygame.K_s:
                         self.jogador.mover_baixo()
-
+                        self.ultima_tecla = 'S'  
 
                 if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_d or event.key == pygame.K_a:
-                        self.jogador.parar_horizontal()
-                    if event.key == pygame.K_w or event.key == pygame.K_s:
-                        self.jogador.parar_vertical()
+                    if event.key == pygame.K_d:
+                        self.jogador.velocidadeX = 0
+                    if event.key == pygame.K_a:
+                        self.jogador.velocidadeX = 0
+                    if event.key == pygame.K_w:
+                        self.jogador.velocidadeY = 0        
+                    if event.key == pygame.K_s:
+                        self.jogador.velocidadeY = 0    
 
-            # colliding
+                # colisões
+            if self.jogador.teste_colisao(self.blockGroup):
+                if self.ultima_tecla == 'D':
+                    self.jogador.velocidadeX = 0
+                    self.jogador.intencao_pos[0] -= 2
+                if self.ultima_tecla == 'A':
+                    self.jogador.velocidadeX = 0
+                    self.jogador.intencao_pos[0] += 2
+                if self.ultima_tecla == 'W':
+                    self.jogador.velocidadeY = 0
+                    self.jogador.intencao_pos[1] += 2
+                if self.ultima_tecla == 'S':
+                    self.jogador.velocidadeY = 0
+                    self.jogador.intencao_pos[1] -= 2
+
             pygame.sprite.groupcollide(self.actionGroup, self.enemyGroup, True, True)  # colisão entre tiro e inimigo
+            pygame.sprite.groupcollide(self.actionGroup, self.blockGroup, True, False)  # colisão entre tiro e mapa
+
             collisionPlayerEnemy = pygame.sprite.spritecollide(self.jogador, self.enemyGroup, False, pygame.sprite.collide_mask) # colisão entre jogador e inimigo
 
+           
+           #Logica de dano e menu_defeat()
+            
             if collisionPlayerEnemy:
-                if  0 >= (self.jogador.vida - 50):    #Gambiarra pra n ficar indo num loop infinito
+                if  0 >= (self.jogador.vida - 50):    
                     gameLoop = False
 
                 self.jogador.tomar_dano(50)
@@ -134,15 +155,13 @@ class Game():
                 self.menu_defeat()
 
 
-            self.jogador.teste_colisao(self.blockGroup)
-
-
 
             # draw
             self.display.fill(self.BLACK)
             self.display.blit(self.barraVida, self.barraVidaRect), (self.barraArmamento, self.barraArmamentoRect)
             self.display.blit(self.barraArmamento, self.barraArmamentoRect)
-            self.display.blit(self.porta, self.portaRect)
+            
+            self.portaGroup.draw(self.display)
             self.object_group.draw(self.display)
             self.blockGroup.draw(self.display)  # desenha os sprites
 
@@ -154,7 +173,7 @@ class Game():
                 gameLoop = False
                 self.menu_win()
 
-            print(self.jogador.rect.centerx, self.jogador.rect.bottom)
+            
 
 
     def menu_defeat(self):
