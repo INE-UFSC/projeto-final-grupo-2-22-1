@@ -4,12 +4,10 @@ from equipamentos import *
 import math
 
 class Enemy(Personagem):
-    def __init__(self, vida, dano, arma, imagem, *groups):
-        super().__init__(vida, dano, arma, *groups)
+    def __init__(self, vida, dano, pos, groups):
+        super().__init__(vida, dano, pos, groups)
 
-        self.image = imagem
-
-        self.image = pygame.transform.scale(self.image, [20, 50])
+        self.image = pygame.image.load("prototipo/arquivos/enemy.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.timer = 0
 

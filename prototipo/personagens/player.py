@@ -4,12 +4,12 @@ from personagens.personagem import Personagem
 
 
 class Player(Personagem):
-    def __init__(self,vida ,dano ,arma, item: Item, *groups):
-        super().__init__(vida,dano,arma, *groups)
+    def __init__(self,vida ,dano ,arma, item: Item, pos, groups):
+        super().__init__(vida,dano,arma,pos, groups)
         self.__item = Item
 
-        self.image = pygame.image.load("prototipo/arquivos/careca.png")  # carregando a imagem
-        self.rect = pygame.Rect(40, 680, 20, 50)  # retangulo do player (posição x, y, altura, largura)
+        self.image = pygame.image.load("prototipo/arquivos/careca.png").convert_alpha()  # carregando a imagem
+        self.rect = pygame.Rect(topleft = pos)  # retangulo do player (posição x, y, altura, largura)
         self.velocidadeX = 0
         self.velocidadeY = 0
         self.intencao_pos = list(self.rect.center)

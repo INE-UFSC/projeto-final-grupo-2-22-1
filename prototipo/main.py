@@ -5,6 +5,7 @@ from personagens.player import Player
 from personagens.enemy import Enemy
 from action import Disparo
 from map import *
+from configs import *
 
 class Game():
 
@@ -34,9 +35,6 @@ class Game():
 
         self.vida = 100
         self.dano = 50
-
-
-        self.jogador = Player(100,50,self.gun,self.pocao,self.object_group)
 
         self.imagem_inimigo = pygame.image.load("prototipo/arquivos/enemy.png")
 
@@ -71,14 +69,15 @@ class Game():
         self.FPS = 120
 
     # Draw
-    def draw_window(self,current_map):  # lógica para criação do map
-
-        for y in range(len(current_map)):
-            for x in range(len(current_map[y])):
-                if current_map[y][x] == "X":
-                    rect1 = Block(self.blockGroup)
-                    rect1.rect.x = x * 32
-                    rect1.rect.y = y * 32
+    def draw_window(self,map1):  # lógica para criação do map
+        for fileira_index,fileira in enumerate(map1):
+            for coluna_index,coluna in enumerate(fileira):
+                x = coluna_index*TILESIZE
+                y = fileira_index*TILESIZE
+                if coluna == 'X':
+                    Block((x, y), [self.blockGroup])
+                if coluna == 'P':
+                    Player(100,50,self.gun,self.pocao, (x, y), [self.object_group])
 
 
 

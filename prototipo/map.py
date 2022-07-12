@@ -1,4 +1,5 @@
 import pygame
+from configs import *
 #from main import GREEN
 
 #map1 32x24, onde '.' será um espaço vazio e 'X' será um obstaculo
@@ -7,37 +8,10 @@ import pygame
 #768 / 24 = 32
 
 class Block(pygame.sprite.Sprite):
-    def __init__(self, *groups):
-        super().__init__(*groups)
-        self.image = pygame.image.load("prototipo/arquivos/bloco.png")
-        self.rect = self.image.get_rect()
-
-
-map1 = [
-    'XXXX........................XXXX',
-    'X..............................X',
-    'X..............................X',
-    'X..............................X',
-    'X...XXXXXXXX........XXXXXXXX...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X.......XXXXX..........X...X',
-    'X...............X..............X',
-    'X...............X..............X',
-    'X...............X..............X',
-    'XXXXX...........XXXXXXXXXXXX...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    'X...X......................X...X',
-    '....XXXXXXXXXX.......XXXXXXX...X',
-    '.....................X.........X',
-    '...............................X',
-    '............................XXXX']
+    def __init__(self, pos, groups):
+        super().__init__(groups)
+        self.image = pygame.image.load("prototipo/arquivos/bloco.png").convert_alpha()
+        self.rect = self.image.get_rect(topleft = pos)
 
 
 

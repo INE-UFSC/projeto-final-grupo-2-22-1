@@ -5,8 +5,9 @@ from abc import ABC, abstractmethod
 
 
 class Personagem(ABC, pygame.sprite.Sprite):
-    def __init__(self, vida, dano, arma: Arma, *groups):
-        super().__init__(*groups)
+    def __init__(self, vida, dano, arma: Arma, pos, groups):
+        super().__init__(groups)
+        self.__pos = pos
         self.__vida = vida
         self.__dano = dano
         self.__arma = arma
@@ -15,7 +16,12 @@ class Personagem(ABC, pygame.sprite.Sprite):
     @abstractmethod
     def update(self):
         pass
-
+    @property
+    def pos(self):
+        return self.__pos
+    @pos.setter
+    def pos(self,pos):
+        self.__pos = pos
     @property
     def vida(self):
         return self.__vida
@@ -40,4 +46,5 @@ class Personagem(ABC, pygame.sprite.Sprite):
 
     def tomar_dano(self, qtdade_dano):
         self.__vida = self.__vida - qtdade_dano
+    
 
