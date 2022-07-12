@@ -160,7 +160,6 @@ class Game():
             self.display.fill(self.BLACK)
             self.display.blit(self.barraVida, self.barraVidaRect), (self.barraArmamento, self.barraArmamentoRect)
             self.display.blit(self.barraArmamento, self.barraArmamentoRect)
-            
             self.portaGroup.draw(self.display)
             self.object_group.draw(self.display)
             self.blockGroup.draw(self.display)  # desenha os sprites
