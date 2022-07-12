@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import pygame
 from equipamentos import *
-from arquivos.personagens.player import *
-from arquivos.personagens.enemy import *
+from personagens.player import *
+from personagens.enemy import *
 from action import Disparo
 from map import *
 

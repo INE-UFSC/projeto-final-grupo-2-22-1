@@ -1,7 +1,7 @@
 import pygame
 import math
 from equipamentos import *
-from arquivos.personagens.personagem import Personagem
+from personagens.personagem import Personagem
 
 class Player(Personagem):
     def __init__(self,vida ,dano ,arma, item: Item, *groups):
