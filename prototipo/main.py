@@ -4,6 +4,7 @@ from equipamentos import *
 from personagens import *
 from action import Disparo
 from map import *
+from botao import button
 
 class Game():
 
@@ -37,7 +38,7 @@ class Game():
 
         self.jogador = Player(100,50,self.gun,self.pocao,self.object_group)
 
-        self.imagem_inimigo = pygame.image.load("arquivos/enemy.png")
+        self.imagem_inimigo = pygame.image.load("prototipo/arquivos/enemy.png")
 
 
         self.newEnemy0 = Enemy(self.vida, self.dano, self.gun , self.imagem_inimigo, self.object_group,self.enemyGroup)
@@ -83,8 +84,90 @@ class Game():
 
 
     # Main
-    def loop_principal(self):
+    def loop_menu(self):
+        loopmenu=True
+        display = pygame.display.set_mode([1024, 768])
+        button1= button('#FCCAAE',393,445,225,66,'Novo jogo')
+        self.display.fill((22,0,31)) 
+        button2= button('#FCCAAE',393,570,222,63,'Opcoes')
+        imagemfundo=pygame.image.load('imagem_fundo_menu.png')
 
+        while loopmenu:
+            display.blit(imagemfundo,(0,0))
+            button1.draw(display)
+            button2.draw(display)
+            
+            for ev in pygame.event.get(): 
+                mouse = pygame.mouse.get_pos() 
+                if ev.type == pygame.QUIT: 
+                    pygame.quit() 
+            
+                if ev.type == pygame.MOUSEBUTTONDOWN: 
+                    if button1.posicao(mouse):
+                        return 1
+                        loopmenu= False                        
+                    if button2.posicao(mouse):
+                        return 2
+                        print('opcoes')
+                if ev.type ==pygame.MOUSEMOTION:
+                    if button1.posicao(mouse):
+                        button1.color = '#FF8845'
+                    else:
+                        button1.color= '#FCCAAE'   
+                    if button2.posicao(mouse):
+                        button2.color = '#FF8845'
+                    else:
+                        button2.color= '#FCCAAE'   
+                pygame.display.update()
+    def loop_opcoes(self):
+        opcoes=True
+        display = pygame.display.set_mode([1024, 768])
+        self.display.fill((22,0,31)) 
+
+        button1= button('#008000',410,450,200,40,'On')
+        button2 = button('#008000',410,600,200,40,'1')
+        switch_som=1
+        switch_dif=1
+        display        
+        while opcoes:
+
+            for ev in pygame.event.get():
+                pygame.display.update()
+
+                mouse = pygame.mouse.get_pos() 
+                button1.draw(display)
+                button2.draw(display)
+                if ev.type == pygame.QUIT: 
+                    pygame.quit() 
+                if ev.type==pygame.MOUSEBUTTONDOWN:
+                    if button1.posicao(mouse):
+                        switch_som+=1
+                        if switch_som%2==0:
+                            button1= button('#FF0000',410,450,200,40,'Off')
+                        else:
+                            button1= button('#008000',410,450,200,40,'On')
+
+                    if button2.posicao(mouse):
+                        switch_dif+=1
+                        if switch_dif==1:
+                            button2 = button('#008000',410,600,200,40,'1')
+                        elif switch_dif==2:
+                            button2 = button('#008000',410,600,200,40,'2')
+   
+                        elif switch_dif==3:
+                            button2 = button('#008000',410,600,200,40,'3')
+
+                        elif switch_dif==4:
+                            switch_dif=1
+                            button2 = button('#008000',410,600,200,40,'1')
+
+                        
+                        print('foi')
+
+
+
+    def loop_principal(self):
+        
 
         gameLoop = True
         while gameLoop:
@@ -191,3 +274,4 @@ class Game():
             self.display.blit(win_text, (275,350))
 
             pygame.display.update()
+    
