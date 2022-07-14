@@ -3,8 +3,6 @@ import math
 from equipamentos import *
 from abc import ABC, abstractmethod
 
-
-
 class Personagem(ABC, pygame.sprite.Sprite):
     def __init__(self, vida, dano, arma: Arma, *groups):
         super().__init__(*groups)

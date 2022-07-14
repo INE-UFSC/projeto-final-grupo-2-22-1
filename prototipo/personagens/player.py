@@ -13,32 +13,24 @@ class Player(Personagem):
         self.velocidadeY = 0
         self.intencao_pos = list(self.rect.center)
 
-        #print(self.__vida)   #Erro aqui "AttributeError: 'Player' object has no attribute 'vida'"
-
-
     def update(self, *args):
         self.rect.center = self.intencao_pos
         self.intencao_pos[0] += self.velocidadeX
         self.intencao_pos[1] += self.velocidadeY
 
     def mover_direita(self):
-        
         self.velocidadeX = 2
         self.velocidadeY = 0
                    
     def mover_esquerda(self):
-        
         self.velocidadeX = -2
-        self.velocidadeY = 0
-                    
+        self.velocidadeY = 0           
 
     def mover_cima(self):
-      
         self.velocidadeY = -2
         self.velocidadeX = 0
             
     def mover_baixo(self):
-        
         self.velocidadeY = 2
         self.velocidadeX = 0
 
