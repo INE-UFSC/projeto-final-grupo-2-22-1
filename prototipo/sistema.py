@@ -1,5 +1,5 @@
-import main
+from main import Game
 
-main.loop_principal()
-#main.menu_defeat()
-#main.menu_win()
+jogo = Game()
+
+jogo.loop_principal()
