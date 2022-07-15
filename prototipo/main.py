@@ -102,7 +102,7 @@ class Game():
             self.display.fill(self.GRAY)
 
             font = pygame.font.Font('freesansbold.ttf', 72)
-            win_text = font.render("Você ganhou!", True, (0, 170, 0))
+            win_text = font.render("Você ganhou!", True, (0, 175, 0))
             self.display.blit(win_text, (275,350))
 
             pygame.display.update()
