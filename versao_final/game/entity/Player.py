@@ -1,5 +1,5 @@
 import pygame
-from entity.Entity import Character
+from character import Character
 
 class Player(Character):
     def __init__(self,vida ,dano ,arma, *groups):
@@ -31,6 +31,7 @@ class Player(Character):
         self.velocidadeY = 2
         self.velocidadeX = 0
 
+    #teste de colisao sera feita no  level. O level vai puxar uma funcao da entidade qual a colisao acontecer.
     def teste_colisao(self, grupo):
         if pygame.sprite.spritecollide(self, grupo, False):
             return True

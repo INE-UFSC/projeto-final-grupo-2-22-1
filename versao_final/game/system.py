@@ -1,5 +1,6 @@
 import pygame
-from game.level import Map1
+from level import Level
+from entity.player import Player  #Player sera instanciado aqui, assim
 
 class Control():
 
@@ -7,6 +8,8 @@ class Control():
     pygame.display.set_caption("Jogo do grupo 2")
 
     def __init__(self):
+        self.__maps = ['maps/map1.csv']    #Aqui os caminhos para os arquivos csv
+
         self.clock = pygame.time.Clock()
         self.FPS = 120
         self.display = pygame.display.set_mode([1024, 768])
@@ -21,4 +24,8 @@ class Control():
                     gameLoop = False
 
             pygame.display.update()
-        
+    
+    
+    @property
+    def maps(self):
+        return self.__maps

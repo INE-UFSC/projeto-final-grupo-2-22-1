@@ -1,6 +1,6 @@
 import pygame
 import math
-from entity.Entity import Character
+from enemy import Character
 
 class Enemy(Character):
     def __init__(self, vida, dano, arma, *groups):
