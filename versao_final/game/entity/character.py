@@ -1,12 +1,13 @@
 import pygame
 from abc import ABC, abstractmethod
 
+
 class Character(ABC, pygame.sprite.Sprite):
-    def __init__(self, vida, dano, arma, *groups):
+    def __init__(self, vida, dano, *groups):
         super().__init__(*groups)
         self.__vida = vida
         self.__dano = dano
-        self.__arma = arma
+        
 
     @property
     def vida(self):
@@ -22,12 +23,7 @@ class Character(ABC, pygame.sprite.Sprite):
     def dano(self,dano):
         self.__dano = dano
 
-    @property
-    def arma(self):
-        return self.__arma
-    @arma.setter
-    def arma(self, arma):
-        return self.__arma
+   
 
 
 

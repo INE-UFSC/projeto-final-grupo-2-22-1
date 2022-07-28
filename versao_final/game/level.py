@@ -3,15 +3,15 @@ import csv
 
 class Level:
     def __init__(self,
-        blocks: list[Block],
-        doors: list[Door],
-        enemies: list[Enemy],
-        player: Player,
+        #blocks: list[Block],
+        #doors: list[Door],
+        #enemies: list[Enemy],
+        #player: Player,
         path: str
     ):
         self.__path = path
-        self.__blocks= blocks
-        self.__doors: doors
+        #self.__blocks= blocks
+        #self.__doors: doors
         self.__win: False               #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
         self.__defeat: False
 
@@ -30,9 +30,16 @@ class Level:
     '''
     def draw_map(self):
         map_array=self.get_map()
-        for line in map_array:
-            for x in line:
-                if x == 'X':
+        for y in range(len(map_array)):
+            for x in range(len(current_map[y])):
+                if == "X":
+                    rect1 = Block(self.blockGroup)
+                    rect1.rect.x = x * 32
+                    rect1.rect.y = y * 32
+                if current_map[y][x] == "P":
+                    rect1 = Porta(self.portaGroup)
+                    rect1.rect.x = x * 32
+                    rect1.rect.y = y * 32
     '''
         
 
