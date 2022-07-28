@@ -1,7 +1,7 @@
 import pygame
-import csv
 from game.map_objects.block import Block
 from game.map_objects.door import Door
+from game.maps.map1 import *
 
 class Level:
     def __init__(self,
@@ -14,31 +14,30 @@ class Level:
         self.__path = path
         #self.__blocks= blocks
         #self.__doors: doors
-        self.__win: False               #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
+        self.__win: False      #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
         self.__defeat: False
+    # Grupos de sprites. (uma das funcionalidades dos grupos de sprite são de detectar colisões entre eles.)
+        self.display_surface = pygame.display.get_surface()
+        self.object_group = pygame.sprite.Group()
+        self.enemyGroup = pygame.sprite.Group()
+        self.blockGroup = pygame.sprite.Group()
+        self.doorGroup = pygame.sprite.Group()
         self.create_map()
     #carrega o codigo do mapa.csv
-    def get_map(self):
-        with open(self.__path,'r') as current_map:
-            csv.reader(current_map)
-            map_array = list(current_map)
-
-            for i in range(0, len(map_array)):
-                map_array[i] = map_array[i].split(',')
-            
-        return map_array
-
+    
     #IMPLEMENTAR O DRAW_MAP
     def create_map(self):
-        map_array = self.get_map()
-        for row_index,row in enumerate(map_array):
+        for row_index,row in enumerate(map1):
             for col_index, col in enumerate(row):
                 x = col_index * 32
                 y = row_index * 32
                 if col == 'X':
-                    Block((x,y),[self.visible_sprites,self.obstacle_sprites])
+                    Block((x,y),[self.blockGroup])
                 if col == 'P':
-                    Door((x,y),[self.visible_sprites])
+                    Door((x,y),[self.doorGroup])
+
+    def run(self):
+        self.blockGroup.draw(self.display_surface)
 ''' 
     def draw_map(self):
         map_array=self.get_map()
