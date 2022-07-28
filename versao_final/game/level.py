@@ -1,5 +1,7 @@
 import pygame
 import csv
+from game.map_objects.block import Block
+from game.map_objects.door import Door
 
 class Level:
     def __init__(self,
@@ -14,7 +16,7 @@ class Level:
         #self.__doors: doors
         self.__win: False               #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
         self.__defeat: False
-
+        self.create_map()
     #carrega o codigo do mapa.csv
     def get_map(self):
         with open(self.__path,'r') as current_map:
@@ -27,25 +29,31 @@ class Level:
         return map_array
 
     #IMPLEMENTAR O DRAW_MAP
-    '''
+    def create_map(self):
+        map_array = self.get_map()
+        for row_index,row in enumerate(map_array):
+            for col_index, col in enumerate(row):
+                x = col_index * 32
+                y = row_index * 32
+                if col == 'X':
+                    Block((x,y),[self.visible_sprites,self.obstacle_sprites])
+                if col == 'P':
+                    Door((x,y),[self.visible_sprites])
+''' 
     def draw_map(self):
         map_array=self.get_map()
-        for y in range(len(map_array)):
-            for x in range(len(current_map[y])):
-                if == "X":
-                    rect1 = Block(self.blockGroup)
-                    rect1.rect.x = x * 32
-                    rect1.rect.y = y * 32
-                if current_map[y][x] == "P":
-                    rect1 = Porta(self.portaGroup)
-                    rect1.rect.x = x * 32
-                    rect1.rect.y = y * 32
-    '''
-        
-
-
-
-
+        for line in range(len(map_array)):
+            for x in line:
+                if x == "X":
+                    block = Block(self.blockGroup) #--nao sei  #mudar nome rect1
+                    block.rect.x = x * 32 #-- nao sei
+                    block.rect.y = y * 32 #-- nao sei
+                if x == "P":
+                    door = Door(self.portaGroup)
+                    door.rect.x = x * 32
+                    door.rect.y = y * 32
+    
+'''
 
 '''
     def 

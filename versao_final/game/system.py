@@ -32,11 +32,12 @@ class Control():
 
             pygame.display.update()
     
+    def collision(self,block):
+        pass
+
     
     @property
     def maps(self):
         return self.__maps
 
-    def collision(self,block):
-        pass
         
