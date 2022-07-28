@@ -1,7 +1,7 @@
 import pygame
-from level import Level
-from .entity.player import Player  #Player sera instanciado aqui, assim
-from .entity.enemy import Enemy
+from game.level import Level
+from game.entity.player import Player  #Player sera instanciado aqui, assim
+from game.entity.enemy import Enemy
 
 class Control():
     def __init__(self):
@@ -17,7 +17,6 @@ class Control():
 
         # Grupos de sprites. (uma das funcionalidades dos grupos de sprite são de detectar colisões entre eles.)
         self.object_group = pygame.sprite.Group()
-        self.actionGroup = pygame.sprite.Group()
         self.enemyGroup = pygame.sprite.Group()
         self.blockGroup = pygame.sprite.Group()
         self.portaGroup = pygame.sprite.Group()

@@ -1,5 +1,5 @@
 import pygame
-from character import Character
+from game.entity.character import Character
 
 class Player(Character):
     def __init__(self,vida ,dano ,arma, *groups):
