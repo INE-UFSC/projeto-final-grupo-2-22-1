@@ -67,7 +67,20 @@ class Control():
                     if event.key == pygame.K_s:
                         self.__player.mover_baixo()
                         self.last_key = 'S'  
-    
+                    
+
+                    #TESTANDO TROCA DE MAPA
+                    if event.key == pygame.K_z:
+                        print(self.__level)
+                        pygame.sprite.Group.empty(self.__blockGroup)
+                        pygame.sprite.Group.empty(self.__doorGroup)
+                        self.__level = Level(self.__player, 'versao_final\game\maps\map2.json', self.__python_groups)
+                        print(self.__level)
+                        self.__level.run()
+
+
+
+
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_d:
                         self.__player.velocidadeX = 0
@@ -81,6 +94,16 @@ class Control():
             self.colision()
             self.__player.update()
             pygame.display.update()
+
+            #if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True) and not self.__change_map:
+                #    self.__level.next_map = True
+                #    self.__current_map += 1
+                #    self.__change_map = True
+
+
+
+
+
 
     def colision(self):
         if self.__player.teste_colisao(self.__blockGroup):
@@ -97,10 +120,6 @@ class Control():
                 self.__player.velocidadeY = 0
                 self.__player.intencao_pos[1] -= 3
 
-                #if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True) and not self.__change_map:
-                #    self.__level.next_map = True
-                #    self.__current_map += 1
-                #    self.__change_map = True
 
 
 
