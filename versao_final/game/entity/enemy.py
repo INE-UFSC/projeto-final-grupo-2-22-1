@@ -3,8 +3,8 @@ import math
 from game.entity.character import Character
 
 class Enemy(Character):
-    def __init__(self, vida, dano, arma, *groups):
-        super().__init__(vida, dano, arma, *groups)
+    def __init__(self, vida, dano,  *groups):
+        super().__init__(vida, dano, *groups)
         self.image = pygame.image.load("image/Enemy/enemy.png")
         self.rect = self.image.get_rect()
         self.timer = 0

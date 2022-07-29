@@ -17,17 +17,28 @@ class Control():
 
         self.__current_map = 0
 
-        self.clock = pygame.time.Clock()
-        self.FPS = 120
+        self.__clock = pygame.time.Clock()
+        self.__FPS = 120
         self.display = pygame.display.set_mode([1024, 768])
 
-        self.level = Level(self.__maps[self.__current_map])
+        self.__object_group = pygame.sprite.Group()
+        self.__enemyGroup = pygame.sprite.Group()
+        self.__blockGroup = pygame.sprite.Group()
+        self.__doorGroup = pygame.sprite.Group()
+
+        python_groups = [self.__object_group, self.__enemyGroup, self.__blockGroup, self.__doorGroup]
+
+
+        self.__level = Level(self.__maps[self.__current_map], python_groups)
+        self.__player = Player()
+
+
 
     def start(self):
         gameLoop = True
         while gameLoop:
-            self.clock.tick(self.FPS)  
-            self.level.run()
+            self.__clock.tick(self.__FPS)  
+            self.__level.run()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     gameLoop = False

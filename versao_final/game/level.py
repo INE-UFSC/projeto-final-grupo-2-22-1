@@ -6,9 +6,11 @@ from game.entity.player import Player
 
 class Level:
     def __init__(self,
+
         #enemies: list[Enemy],
         player: Player, 
-        path: str
+        path: str,
+        pygame_groups: list
     ):
         self.__path = path
         self.__player = Player
@@ -16,11 +18,11 @@ class Level:
         self.__defeat: False
 
     # Grupos de sprites. (uma das funcionalidades dos grupos de sprite são de detectar colisões entre eles.)
-        self.display_surface = pygame.display.get_surface()
-        self.object_group = pygame.sprite.Group()
-        self.enemyGroup = pygame.sprite.Group()
-        self.blockGroup = pygame.sprite.Group()
-        self.doorGroup = pygame.sprite.Group()
+        self.__display_surface = pygame.display.get_surface()
+        self.__object_group = pygame_groups[0]
+        self.__enemyGroup = pygame_groups[1]
+        self.__blockGroup = pygame_groups[2]
+        self.__doorGroup = pygame_groups[3]
         self.create_map()
 
     #carrega o codigo do mapa.json
@@ -38,13 +40,13 @@ class Level:
                 x = col_index * 32
                 y = row_index * 32
                 if col == 'X':
-                    Block((x,y),[self.blockGroup])
+                    Block((x,y),[self.__blockGroup])
                 if col == 'D':
-                    Door((x,y),[self.doorGroup])
+                    Door((x,y),[self.__doorGroup])
 
     def run(self):
-        self.blockGroup.draw(self.display_surface)
-        self.doorGroup.draw(self.display_surface)
+        self.__blockGroup.draw(self.__display_surface)
+        self.__doorGroup.draw(self.__display_surface)
     
 
     def collision_detector(self):

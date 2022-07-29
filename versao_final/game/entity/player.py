@@ -2,8 +2,8 @@ import pygame
 from game.entity.character import Character
 
 class Player(Character):
-    def __init__(self,vida ,dano ,arma, *groups):
-        super().__init__(vida,dano,arma, *groups)
+    def __init__(self, vida, dano, *groups):
+        super().__init__(vida, dano ,*groups)
         self.image = pygame.image.load("image/Player/player.png")  # carregando a imagem
         self.rect = pygame.Rect(40, 680, 20, 50)  # retangulo do player (posição x, y, altura, largura)
         self.velocidadeX = 0
