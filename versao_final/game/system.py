@@ -38,6 +38,7 @@ class Control():
         gameLoop = True
         while gameLoop:
             self.__clock.tick(self.__FPS)  
+            self.display.fill((0,0,0))
             self.__level.run()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
