@@ -19,7 +19,7 @@ class Control():
         self.__last_key = ''
         self.__current_map = 0
 
-        self.__mudar_mapa = False
+        self.__change_map = False
 
 
         self.__clock = pygame.time.Clock()
@@ -49,32 +49,41 @@ class Control():
                 if event.type == pygame.QUIT:
                     gameLoop = False
 
-                if self.__level.next_map and self.__mudar_mapa:
-                    self.__mudar_mapa = False
+                if self.__level.next_map and self.__change_map:
+                    self.__change_map = False
                     
+
+                    print(self.__current_map)
                     print(self.__maps[self.__current_map])
 
-                    self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
+                    #erro aqui talvez
+                    self.__level = Level(self.__player, self.__maps[1], self.__python_groups)
 
             
+                
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_d:
-                        self.__player.mover_direita()
-                        self.__last_key  = 'D'         
+                        if not pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
+                            self.__player.mover_direita()
+                            self.__last_key  = 'D'         
         
                     if event.key == pygame.K_a:
-                        self.__player.mover_esquerda()
-                        self.__last_key  = 'A'     
+                        if not pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
+                            self.__player.mover_esquerda()
+                            self.__last_key  = 'A'  
+
 
                                         
                     if event.key == pygame.K_w:
-                        self.__player.mover_cima()
-                        self.__last_key  = 'W'     
+                        if not pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
+                            self.__player.mover_cima()
+                            self.__last_key  = 'W'     
 
                                     
                     if event.key == pygame.K_s:
-                        self.__player.mover_baixo()
-                        self.__last_key  = 'S' 
+                        if not pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
+                            self.__player.mover_baixo()
+                            self.__last_key  = 'S' 
     
 
                 if event.type == pygame.KEYUP:
@@ -87,6 +96,7 @@ class Control():
                     if event.key == pygame.K_s:
                         self.__player.velocidadeY = 0
 
+                '''
                 #colisao
                 if pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
             
@@ -108,15 +118,15 @@ class Control():
                     elif self.__last_key == 'S':
                         self.__player.velocidadeY = 0
                         self.__player.intencao_pos[1] -= 2      
-                        
+                '''   
                         
 
 
                
-                    if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True):
-                        self.__level.next_map = True
-                        self.__current_map += 1
-                        self.__mudar_mapa = True
+                if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True) and not self.__change_map:
+                    self.__level.next_map = True
+                    self.__current_map += 1
+                    self.__change_map = True
 
 
 
