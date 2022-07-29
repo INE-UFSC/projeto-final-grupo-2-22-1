@@ -38,59 +38,5 @@ class Level:
 
     def run(self):
         self.blockGroup.draw(self.display_surface)
-''' 
-    def draw_map(self):
-        map_array=self.get_map()
-        for line in range(len(map_array)):
-            for x in line:
-                if x == "X":
-                    block = Block(self.blockGroup) #--nao sei  #mudar nome rect1
-                    block.rect.x = x * 32 #-- nao sei
-                    block.rect.y = y * 32 #-- nao sei
-                if x == "P":
-                    door = Door(self.portaGroup)
-                    door.rect.x = x * 32
-                    door.rect.y = y * 32
-    
-'''
 
-'''
-    def 
-
-
-        """Uma fase do jogo"""
-
-    @classmethod
-    def from_file(cls, file: str) -> "Level":
-        """Carregar uma fase de um arquivo"""
-
-    @classmethod
-    def from_list(cls, level: list[str]) -> "Level":
-        """Carregar uma fase de uma lista"""
-
-    def __init__(
-        self,
-        blocks: list[Block],
-        doors: list[Door],
-        enemies: list[Enemy],
-        player: Player,
-    ):
-        self.__blocks = Group(*blocks)
-        self.__doors = Group(*doors)
-        self.__enemies = Group(*enemies)
-        self.__player = player
-
-        self.finished = False
-        self.win
-        self.lose
-
-    def update(self):
-        """Atualiza as entidades"""
-        for enemy in spritecollide(self.__player, self.__enemies):
-            enemy.damage(self.__player)
-
-    def draw(self, screen: ...):
-        """Renderiza a fase na tela"""
-
-'''
     

@@ -13,7 +13,7 @@ class Control():
 
         self.clock = pygame.time.Clock()
         self.FPS = 120
-        self.display = pygame.display.set_mode([1024, 960])
+        self.display = pygame.display.set_mode([1024, 768])
 
         self.level = Level(self.__maps[0])
     def start(self):
@@ -26,7 +26,8 @@ class Control():
                     gameLoop = False
 
             pygame.display.update()
-    
+
+
     def collision(self,block):
         pass
 
