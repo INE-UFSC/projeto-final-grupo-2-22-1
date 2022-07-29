@@ -21,8 +21,9 @@ class Control():
         self.__change_map = False
 
         self.__clock = pygame.time.Clock()
-        self.__FPS = 120
+        self.__FPS = 60
         self.display = pygame.display.set_mode([1024, 768])
+        self.background = pygame.image.load('versao_final/game/image/background/background1.png')
 
         self.__object_group = pygame.sprite.Group()
         self.__enemyGroup = pygame.sprite.Group()
@@ -38,7 +39,9 @@ class Control():
         gameLoop = True
         while gameLoop:
             self.__clock.tick(self.__FPS)  
-            self.display.fill((0,0,0))
+            #self.display.fill((0,0,0))
+            self.display.blit(self.background, (0, 0))
+            #display.blit(ImageFundo, (0, 0))
             self.__level.run()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -83,16 +86,16 @@ class Control():
         if self.__player.teste_colisao(self.__blockGroup):
             if self.last_key == 'D':
                 self.__player.velocidadeX = 0
-                self.__player.intencao_pos[0] -= 2
+                self.__player.intencao_pos[0] -= 3
             if self.last_key == 'A':
                 self.__player.velocidadeX = 0
-                self.__player.intencao_pos[0] += 2
+                self.__player.intencao_pos[0] += 3
             if self.last_key == 'W':
                 self.__player.velocidadeY = 0
-                self.__player.intencao_pos[1] += 2
+                self.__player.intencao_pos[1] += 3
             if self.last_key == 'S':
                 self.__player.velocidadeY = 0
-                self.__player.intencao_pos[1] -= 2
+                self.__player.intencao_pos[1] -= 3
 
                 #if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True) and not self.__change_map:
                 #    self.__level.next_map = True
