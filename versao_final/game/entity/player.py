@@ -4,7 +4,11 @@ from game.entity.character import Character
 class Player(Character):
     def __init__(self, vida, dano, *groups):
         super().__init__(vida, dano ,*groups)
-        self.image = pygame.image.load("versao_final/game/image/Player/player.png")  # carregando a imagem
+        try:
+            self.image = pygame.image.load("versao_final/game/image/Player/player.png")  # carregando a imagem
+        except FileNotFoundError:
+            self.image = pygame.image.load("versao_final\game\image\Player\player.png") 
+
         self.rect = pygame.Rect(40, 680, 20, 50)  # retangulo do player (posição x, y, altura, largura)
         self.__velocidadeX = 0
         self.__velocidadeY = 0
