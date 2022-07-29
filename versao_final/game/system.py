@@ -9,13 +9,15 @@ class Control():
         pygame.init()
         pygame.display.set_caption("Jogo do grupo 2")
 
-        self.__maps = ['maps/map1.py']    #Aqui os caminhos para os arquivos csv
+        #tryexception OS
+        self.__maps = ['versao_final/game/maps/map1.json']    #Aqui os caminhos para os arquivos csv
+        self.__current_map = 0
 
         self.clock = pygame.time.Clock()
         self.FPS = 120
         self.display = pygame.display.set_mode([1024, 768])
 
-        self.level = Level(self.__maps[0])
+        self.level = Level(self.__maps[self.__current_map])
     def start(self):
         gameLoop = True
         while gameLoop:
