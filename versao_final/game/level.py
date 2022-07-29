@@ -33,10 +33,12 @@ class Level:
                 y = row_index * 32
                 if col == 'X':
                     Block((x,y),[self.blockGroup])
-                if col == 'P':
+                if col == 'D':
                     Door((x,y),[self.doorGroup])
 
     def run(self):
         self.blockGroup.draw(self.display_surface)
+        self.doorGroup.draw(self.display_surface)
+        
 
     
