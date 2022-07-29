@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class Character(ABC, pygame.sprite.Sprite):
-    def __init__(self, vida, dano *groups):
+    def __init__(self, vida, dano, *groups):
         super().__init__(*groups)
         self.__vida = vida
         self.__dano = dano

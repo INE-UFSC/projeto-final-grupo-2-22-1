@@ -28,9 +28,9 @@ class Control():
 
         python_groups = [self.__object_group, self.__enemyGroup, self.__blockGroup, self.__doorGroup]
 
-
-        self.__level = Level(self.__maps[self.__current_map], python_groups)
         self.__player = Player(200,50,self.__object_group)
+        self.__level = Level(self.__player, self.__maps[self.__current_map], python_groups)
+        
 
 
 

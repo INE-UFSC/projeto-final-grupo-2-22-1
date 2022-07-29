@@ -49,6 +49,7 @@ class Level:
     def run(self):
         self.__blockGroup.draw(self.__display_surface)
         self.__doorGroup.draw(self.__display_surface)
+        self.__object_group.draw(self.__display_surface)
     
 
     def collision_detector(self):
