@@ -52,7 +52,5 @@ class Level:
         self.__object_group.draw(self.__display_surface)
     
 
-    def collision_detector(self):
-        pass
 
     

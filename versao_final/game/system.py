@@ -14,7 +14,7 @@ class Control():
         except FileNotFoundError:
             self.__maps = ['versao_final\game\maps\map1.json']
 
-
+        self.__last_key = ''
         self.__current_map = 0
 
         self.__clock = pygame.time.Clock()
@@ -44,19 +44,26 @@ class Control():
                 if event.type == pygame.QUIT:
                     gameLoop = False
 
+            
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_d:
                         self.__player.mover_direita()
-                        self.ultima_tecla = 'D'                   
+                        self.__last_key  = 'D'         
+        
                     if event.key == pygame.K_a:
                         self.__player.mover_esquerda()
-                        self.ultima_tecla = 'A'                    
+                        self.__last_key  = 'A'     
+
+                                        
                     if event.key == pygame.K_w:
                         self.__player.mover_cima()
-                        self.ultima_tecla = 'W'                   
+                        self.__last_key  = 'W'     
+
+                                    
                     if event.key == pygame.K_s:
                         self.__player.mover_baixo()
-                        self.ultima_tecla = 'S'  
+                        self.__last_key  = 'S' 
+    
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_d:
@@ -68,7 +75,34 @@ class Control():
                     if event.key == pygame.K_s:
                         self.__player.velocidadeY = 0    
 
-            self.__object_group.update()
+
+                if pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
+            
+                    if  self.__last_key == 'D':
+                        self.__player.velocidadeX = 0
+                        self.__player.intencao_pos[0] -= 2
+
+                        print('DIREITAAAA') 
+                    elif self.__last_key == 'A':
+                        self.__player.velocidadeX = 0
+                        self.__player.intencao_pos[0] += 2
+
+                        print('ESQUERDAAAA')   
+                    elif self.__last_key == 'W':
+                        self.__player.velocidadeY = 0
+                        self.__player.intencao_pos[1] += 2
+
+                        print('CIMAAAAA')     
+                    elif self.__last_key == 'S':
+                        self.__player.velocidadeY = 0
+                        self.__player.intencao_pos[1] -= 2      
+                        
+                        print('BAIXOOO')       
+               
+
+
+
+            self.__player.update()
             pygame.display.update()
  
     @property
