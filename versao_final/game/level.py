@@ -14,8 +14,8 @@ class Level:
     ):
         self.__path = path
         self.__player = Player
-        self.__win: False      #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
-        self.__defeat: False
+        self.__win = False      #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
+        self.__defeat = False
 
     # Grupos de sprites. (uma das funcionalidades dos grupos de sprite são de detectar colisões entre eles.)
         self.__display_surface = pygame.display.get_surface()
