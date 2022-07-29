@@ -9,8 +9,12 @@ class Control():
         pygame.init()
         pygame.display.set_caption("Jogo do grupo 2")
 
-        #tryexception OS
-        self.__maps = ['versao_final/game/maps/map1.json']    #Aqui os caminhos para os arquivos csv
+        try:
+            self.__maps = ['versao_final/game/maps/map1.json']    #Aqui os caminhos para os arquivos csv
+        except FileNotFoundError:
+            self.__maps = ['versao_final\game\maps\map1.json']
+
+
         self.__current_map = 0
 
         self.clock = pygame.time.Clock()
@@ -18,6 +22,7 @@ class Control():
         self.display = pygame.display.set_mode([1024, 768])
 
         self.level = Level(self.__maps[self.__current_map])
+
     def start(self):
         gameLoop = True
         while gameLoop:
@@ -28,12 +33,7 @@ class Control():
                     gameLoop = False
 
             pygame.display.update()
-
-
-    def collision(self,block):
-        pass
-
-    
+ 
     @property
     def maps(self):
         return self.__maps

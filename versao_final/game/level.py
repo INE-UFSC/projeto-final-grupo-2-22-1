@@ -2,19 +2,16 @@ import pygame
 import json
 from game.map_objects.block import Block
 from game.map_objects.door import Door
-from game.maps.map1 import *
+from game.entity.player import Player
 
 class Level:
     def __init__(self,
-        #blocks: list[Block],
-        #doors: list[Door],
         #enemies: list[Enemy],
-        #player: Player,
+        player: Player, 
         path: str
     ):
         self.__path = path
-        #self.__blocks= blocks
-        #self.__doors: doors
+        self.__player = Player
         self.__win: False      #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
         self.__defeat: False
 
@@ -48,6 +45,9 @@ class Level:
     def run(self):
         self.blockGroup.draw(self.display_surface)
         self.doorGroup.draw(self.display_surface)
-        
+    
+
+    def collision_detector(self):
+        pass
 
     
