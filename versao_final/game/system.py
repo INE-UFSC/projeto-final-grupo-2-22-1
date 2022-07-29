@@ -43,6 +43,31 @@ class Control():
                 if event.type == pygame.QUIT:
                     gameLoop = False
 
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_d:
+                        self.__player.mover_direita()
+                        self.ultima_tecla = 'D'                   
+                    if event.key == pygame.K_a:
+                        self.__player.mover_esquerda()
+                        self.ultima_tecla = 'A'                    
+                    if event.key == pygame.K_w:
+                        self.__player.mover_cima()
+                        self.ultima_tecla = 'W'                   
+                    if event.key == pygame.K_s:
+                        self.__player.mover_baixo()
+                        self.ultima_tecla = 'S'  
+
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_d:
+                        self.__player.velocidadeX = 0
+                    if event.key == pygame.K_a:
+                        self.__player.velocidadeX = 0
+                    if event.key == pygame.K_w:
+                        self.__player.velocidadeY = 0        
+                    if event.key == pygame.K_s:
+                        self.__player.velocidadeY = 0    
+
+            self.__object_group.update()
             pygame.display.update()
  
     @property
