@@ -16,27 +16,32 @@ class Player(Character):
         
 
 
-    def update(self, *args):
- 
-        self.__intencao_pos[0] += self.__velocidadeX
-        self.__intencao_pos[1] += self.__velocidadeY
-        self.rect.center = self.__intencao_pos
+    def update(self, *args): 
+        self.intencao_pos[0] += self.velocidadeX
+        self.intencao_pos[1] += self.velocidadeY
+        self.rect.center = self.intencao_pos
 
     def mover_direita(self):
-        self.__velocidadeX = 2
-        self.__velocidadeY = 0
+        self.velocidadeX = 2
+        self.velocidadeY = 0
                    
     def mover_esquerda(self):
-        self.__velocidadeX = -2
-        self.__velocidadeY = 0           
+        self.velocidadeX = -2
+        self.velocidadeY = 0           
 
     def mover_cima(self):
-        self.__velocidadeY = -2
-        self.__velocidadeX = 0
+        self.velocidadeY = -2
+        self.velocidadeX = 0
             
     def mover_baixo(self):
-        self.__velocidadeY = 2
-        self.__velocidadeX = 0
+        self.velocidadeY = 2
+        self.velocidadeX = 0
+
+    def teste_colisao(self, grupo):
+        if pygame.sprite.spritecollide(self, grupo, False):
+            return True
+        else:
+            return  False 
 
 
 
