@@ -14,7 +14,8 @@ class Level:
     ):
         self.__path = path
         self.__player = Player
-        self.__win = False      #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
+        self.__next_map = False
+        self.__next_map = False      #Essas condicoes o system vai analisar e decidir oq fazer (Puxar algum menu, mudar o level... etc)
         self.__defeat = False
 
     # Grupos de sprites. (uma das funcionalidades dos grupos de sprite são de detectar colisões entre eles.)
@@ -50,6 +51,21 @@ class Level:
         self.__blockGroup.draw(self.__display_surface)
         self.__doorGroup.draw(self.__display_surface)
         self.__object_group.draw(self.__display_surface)
+
+    
+    @property
+    def next_map(self):
+        return  self.__next_map
+    @next_map.setter
+    def next_map(self, boolean):
+        self.__next_map = boolean
+    
+    @property
+    def defeat(self):
+        return self.__defeat
+    @defeat.setter
+    def defeat(self, boolean):
+        self.__defeat = boolean
     
 
 

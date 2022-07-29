@@ -1,4 +1,5 @@
 import pygame
+from game.UI.interface import Interface
 from game.level import Level
 from game.entity.player import Player  #Player sera instanciado aqui, assim
 from game.entity.enemy import Enemy
@@ -10,12 +11,16 @@ class Control():
         pygame.display.set_caption("Jogo do grupo 2")
 
         try:
-            self.__maps = ['versao_final/game/maps/map1.json']    #Aqui os caminhos para os arquivos csv
-        except FileNotFoundError:
-            self.__maps = ['versao_final\game\maps\map1.json']
+            self.__maps = ['versao_final/game/maps/map1.json', 'versao_final/game/maps/map1.json'] 
+
+        except FileNotFoundError:  
+            self.__maps = ['versao_final\game\maps\map1.json', 'versao_final\game\maps\map2.json']
 
         self.__last_key = ''
         self.__current_map = 0
+
+        self.__mudar_mapa = False
+
 
         self.__clock = pygame.time.Clock()
         self.__FPS = 120
@@ -26,10 +31,10 @@ class Control():
         self.__blockGroup = pygame.sprite.Group()
         self.__doorGroup = pygame.sprite.Group()
 
-        python_groups = [self.__object_group, self.__enemyGroup, self.__blockGroup, self.__doorGroup]
+        self.__python_groups = [self.__object_group, self.__enemyGroup, self.__blockGroup, self.__doorGroup]
 
         self.__player = Player(200,50,self.__object_group)
-        self.__level = Level(self.__player, self.__maps[self.__current_map], python_groups)
+        self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
         
 
 
@@ -43,6 +48,13 @@ class Control():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     gameLoop = False
+
+                if self.__level.next_map and self.__mudar_mapa:
+                    self.__mudar_mapa = False
+                    
+                    print(self.__maps[self.__current_map])
+
+                    self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
 
             
                 if event.type == pygame.KEYDOWN:
@@ -73,32 +85,39 @@ class Control():
                     if event.key == pygame.K_w:
                         self.__player.velocidadeY = 0        
                     if event.key == pygame.K_s:
-                        self.__player.velocidadeY = 0    
+                        self.__player.velocidadeY = 0
 
-
+                #colisao
                 if pygame.sprite.spritecollide(self.__player, self.__blockGroup, False):
             
                     if  self.__last_key == 'D':
                         self.__player.velocidadeX = 0
                         self.__player.intencao_pos[0] -= 2
 
-                        print('DIREITAAAA') 
+                  
                     elif self.__last_key == 'A':
                         self.__player.velocidadeX = 0
                         self.__player.intencao_pos[0] += 2
 
-                        print('ESQUERDAAAA')   
+                         
                     elif self.__last_key == 'W':
                         self.__player.velocidadeY = 0
                         self.__player.intencao_pos[1] += 2
 
-                        print('CIMAAAAA')     
+                          
                     elif self.__last_key == 'S':
                         self.__player.velocidadeY = 0
                         self.__player.intencao_pos[1] -= 2      
                         
-                        print('BAIXOOO')       
+                        
+
+
                
+                    if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True):
+                        self.__level.next_map = True
+                        self.__current_map += 1
+                        self.__mudar_mapa = True
+
 
 
 
