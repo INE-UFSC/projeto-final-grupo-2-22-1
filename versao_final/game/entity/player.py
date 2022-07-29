@@ -9,6 +9,8 @@ class Player(Character):
         self.velocidadeX = 0
         self.velocidadeY = 0
         self.intencao_pos = list(self.rect.center)
+        
+
 
     def update(self, *args):
         self.rect.center = self.intencao_pos

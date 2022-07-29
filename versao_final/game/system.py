@@ -30,7 +30,7 @@ class Control():
 
 
         self.__level = Level(self.__maps[self.__current_map], python_groups)
-        self.__player = Player()
+        self.__player = Player(200,50,self.__object_group)
 
 
 

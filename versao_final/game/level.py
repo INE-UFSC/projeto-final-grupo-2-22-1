@@ -43,6 +43,8 @@ class Level:
                     Block((x,y),[self.__blockGroup])
                 if col == 'D':
                     Door((x,y),[self.__doorGroup])
+                if col == 'P':
+                    self.__player.rect = pygame.Rect(x, y, 20, 50)
 
     def run(self):
         self.__blockGroup.draw(self.__display_surface)
