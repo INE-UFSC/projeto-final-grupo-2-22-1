@@ -81,6 +81,8 @@ class Control():
                     self.__current_map = self.__current_map + 1
                     pygame.sprite.Group.empty(self.__blockGroup)
                     pygame.sprite.Group.empty(self.__doorGroup)
+                    pygame.sprite.Group.empty(self.__enemyGroup)
+
                     self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
                     print(self.__current_map)
                     
