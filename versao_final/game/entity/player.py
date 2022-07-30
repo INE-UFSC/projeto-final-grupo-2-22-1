@@ -22,19 +22,19 @@ class Player(Character):
         self.rect.center = self.intencao_pos
 
     def mover_direita(self):
-        self.velocidadeX = 3
+        self.velocidadeX = 6
         self.velocidadeY = 0
                    
     def mover_esquerda(self):
-        self.velocidadeX = -3
+        self.velocidadeX = -6
         self.velocidadeY = 0           
 
     def mover_cima(self):
-        self.velocidadeY = -3
+        self.velocidadeY = -6
         self.velocidadeX = 0
             
     def mover_baixo(self):
-        self.velocidadeY = 3
+        self.velocidadeY = 6
         self.velocidadeX = 0
 
     def teste_colisao(self, grupo):
