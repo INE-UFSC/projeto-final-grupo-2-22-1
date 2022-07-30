@@ -29,8 +29,9 @@ class Control():
         self.__enemyGroup = pygame.sprite.Group()
         self.__blockGroup = pygame.sprite.Group()
         self.__doorGroup = pygame.sprite.Group()
+        self.__goldendoorGroup = pygame.sprite.Group()
 
-        self.__python_groups = [self.__object_group, self.__enemyGroup, self.__blockGroup, self.__doorGroup]
+        self.__python_groups = [self.__object_group, self.__enemyGroup, self.__blockGroup, self.__doorGroup, self.__goldendoorGroup]
 
         self.__player = Player(200,50,self.__object_group)
         self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
@@ -85,6 +86,12 @@ class Control():
 
                     self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
                     print(self.__current_map)
+                
+                elif self.__player.teste_colisao(self.__goldendoorGroup):
+                    print('GANHOUYUUUUUUUUUU')
+
+                    
+                    
                     
 
                 

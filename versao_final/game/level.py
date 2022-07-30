@@ -4,6 +4,7 @@ from game.map_objects.block import Block
 from game.map_objects.door import Door
 from game.entity.player import Player
 from game.entity.enemy import Enemy
+from game.map_objects.goldendoor import GoldenDoor
 class Level:
     def __init__(self,
 
@@ -26,6 +27,7 @@ class Level:
         self.__enemyGroup = pygame_groups[1]
         self.__blockGroup = pygame_groups[2]
         self.__doorGroup = pygame_groups[3]
+        self.__goldendoorGroup = pygame_groups[4]
         self.create_map()
 
     #carrega o codigo do mapa.json
@@ -50,9 +52,13 @@ class Level:
                     self.__player.rect = pygame.Rect(x, y, 20, 50)
                 elif col == 'E':
                     Enemy((x,y),1,100, [self.__enemyGroup])
+                elif col == 'G':
+                    GoldenDoor((x,y),[self.__goldendoorGroup])
+
     def run(self):
         self.__blockGroup.draw(self.__display_surface)
         self.__doorGroup.draw(self.__display_surface)
+        self.__goldendoorGroup.draw(self.__display_surface)
         self.__object_group.draw(self.__display_surface)
         self.__enemyGroup.draw(self.__display_surface)
     

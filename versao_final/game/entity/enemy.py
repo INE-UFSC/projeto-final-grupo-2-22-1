@@ -1,4 +1,3 @@
-from turtle import pos
 import pygame
 import math
 from game.entity.character import Character
