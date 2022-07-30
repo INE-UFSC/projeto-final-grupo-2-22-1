@@ -90,7 +90,8 @@ class Control():
                 elif self.__player.teste_colisao(self.__goldendoorGroup):
                     print('GANHOUYUUUUUUUUUU')
 
-                    
+                elif self.__player.teste_colisao(self.__enemyGroup):
+                    print('PERDEUUUUUUUUUUUUU')
                     
                     
 
