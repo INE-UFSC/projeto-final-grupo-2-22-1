@@ -8,7 +8,7 @@ class Control():
     def __init__(self):
 
         pygame.init()
-        pygame.display.set_caption("Jogo do grupo 2")
+        pygame.display.set_caption("Bald Run")
 
         try:
             self.__maps = ['versao_final/game/maps/map1.json', 'versao_final/game/maps/map2.json', 'versao_final/game/maps/map3.json'] 
@@ -18,12 +18,16 @@ class Control():
 
         self.last_key = ''
         self.__current_map = 0
-        self.__change_map = False
+
+        self.__gameLoop = True
+        
 
         self.__clock = pygame.time.Clock()
         self.__FPS = 60
         self.display = pygame.display.set_mode([1024, 768])
         self.background = pygame.image.load('versao_final/game/image/background/background1.png')
+
+        
 
         self.__object_group = pygame.sprite.Group()
         self.__enemyGroup = pygame.sprite.Group()
@@ -37,8 +41,8 @@ class Control():
         self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
         
     def start(self):
-        gameLoop = True
-        while gameLoop:
+        self.__gameLoop = True
+        while self.__gameLoop:
             self.__clock.tick(self.__FPS)  
             #self.display.fill((0,0,0))
             self.display.blit(self.background, (0, 0))
@@ -46,7 +50,7 @@ class Control():
             self.__level.run()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    gameLoop = False
+                    self.__gameLoop = False
 
                   
                 
@@ -87,11 +91,42 @@ class Control():
                     self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
                     print(self.__current_map)
                 
+
+
+
+
                 elif self.__player.teste_colisao(self.__goldendoorGroup):
-                    print('GANHOUYUUUUUUUUUU')
+
+                    win_loop = True
+                    while win_loop:
+                        for event in pygame.event.get():   
+                            if event.type == pygame.QUIT:
+                                self.__gameLoop = False
+                                win_loop = False
+
+                        self.display.fill((207, 207, 196))
+                        font = pygame.font.Font('freesansbold.ttf', 72)
+                        win_text = font.render("Você ganhou!", True, (0, 170, 0))
+                        self.display.blit(win_text, (275,350))
+                        pygame.display.update()
+
+
 
                 elif self.__player.teste_colisao(self.__enemyGroup):
-                    print('PERDEUUUUUUUUUUUUU')
+
+                    defeat_loop = True
+                    while defeat_loop:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                self.__gameLoop = False
+                                defeat_loop = False
+                                
+
+                        self.display.fill((46, 46, 46))
+                        font = pygame.font.Font('freesansbold.ttf', 72)
+                        defeat_text = font.render("GAME OVER", True, (255, 0, 0))
+                        self.display.blit(defeat_text, (275, 350))
+                        pygame.display.update()
                     
                     
 
