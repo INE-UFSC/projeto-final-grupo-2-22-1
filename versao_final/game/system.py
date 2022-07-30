@@ -14,7 +14,7 @@ class Control():
             self.__maps = ['versao_final/game/maps/map1.json', 'versao_final/game/maps/map2.json', 'versao_final/game/maps/map3.json'] 
 
         except FileNotFoundError:  
-            self.__maps = ['versao_final\game\maps\map1.json', 'versao_final\game\maps\map2.json', 'versao_final\game\maps\map2.json']
+            self.__maps = ['versao_final\game\maps\map1.json', 'versao_final\game\maps\map2.json', 'versao_final\game\maps\map3.json']
 
         self.last_key = ''
         self.__current_map = 0
@@ -92,11 +92,7 @@ class Control():
             pygame.display.update()
             self.__enemyGroup.update()
 
-            #if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True) and not self.__change_map:
-                #    self.__level.next_map = True
-                #    self.__current_map += 1
-                #    self.__change_map = True
-
+            
 
 
 
