@@ -41,7 +41,7 @@ class Player(Character):
         if pygame.sprite.spritecollide(self, grupo, False):
             return True
         else:
-            return  False 
+            return False 
 
 
 
