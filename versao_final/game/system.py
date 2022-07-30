@@ -11,10 +11,10 @@ class Control():
         pygame.display.set_caption("Jogo do grupo 2")
 
         try:
-            self.__maps = ['versao_final/game/maps/map1.json', 'versao_final/game/maps/map1.json'] 
+            self.__maps = ['versao_final/game/maps/map1.json', 'versao_final/game/maps/map2.json', 'versao_final/game/maps/map3.json'] 
 
         except FileNotFoundError:  
-            self.__maps = ['versao_final\game\maps\map1.json', 'versao_final\game\maps\map2.json']
+            self.__maps = ['versao_final\game\maps\map1.json', 'versao_final\game\maps\map2.json', 'versao_final\game\maps\map2.json']
 
         self.last_key = ''
         self.__current_map = 0
@@ -47,12 +47,7 @@ class Control():
                 if event.type == pygame.QUIT:
                     gameLoop = False
 
-                if self.__level.next_map and self.__change_map:
-                    self.__change_map = False              
-                    print(self.__current_map)
-                    print(self.__maps[self.__current_map])
-                    #erro aqui talvez
-                    self.__level = Level(self.__player, self.__maps[1], self.__python_groups)         
+                  
                 
                 if event.type == pygame.KEYDOWN:     
                     if event.key == pygame.K_d:
@@ -67,19 +62,7 @@ class Control():
                     if event.key == pygame.K_s:
                         self.__player.mover_baixo()
                         self.last_key = 'S'  
-                    
-
-                    #TESTANDO TROCA DE MAPA
-                    if event.key == pygame.K_z:
-                        print(self.__level)
-                        pygame.sprite.Group.empty(self.__blockGroup)
-                        pygame.sprite.Group.empty(self.__doorGroup)
-                        self.__level = Level(self.__player, 'versao_final\game\maps\map2.json', self.__python_groups)
-                        print(self.__level)
-                        self.__level.run()
-
-
-
+                   
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_d:
@@ -90,6 +73,19 @@ class Control():
                         self.__player.velocidadeY = 0        
                     if event.key == pygame.K_s:
                         self.__player.velocidadeY = 0
+
+
+
+
+                if self.__player.teste_colisao(self.__doorGroup):
+                    self.__current_map = self.__current_map + 1
+                    pygame.sprite.Group.empty(self.__blockGroup)
+                    pygame.sprite.Group.empty(self.__doorGroup)
+                    self.__level = Level(self.__player, self.__maps[self.__current_map], self.__python_groups)
+                    print(self.__current_map)
+                    
+
+                
 
             self.colision()
             self.__player.update()
