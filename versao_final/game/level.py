@@ -44,12 +44,12 @@ class Level:
                 y = row_index * 32
                 if col == 'X':
                     Block((x,y),[self.__blockGroup])
-                if col == 'D':
+                elif col == 'D':
                     Door((x,y),[self.__doorGroup])
-                if col == 'P':
+                elif col == 'P':
                     self.__player.rect = pygame.Rect(x, y, 20, 50)
-                if col == 'E':
-                    Enemy((x,y), [self.__enemyGroup])
+                elif col == 'E':
+                    Enemy((x,y),1,100, [self.__enemyGroup])
     def run(self):
         self.__blockGroup.draw(self.__display_surface)
         self.__doorGroup.draw(self.__display_surface)
