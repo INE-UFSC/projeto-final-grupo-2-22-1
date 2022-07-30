@@ -94,6 +94,7 @@ class Control():
             self.colision()
             self.__player.update()
             pygame.display.update()
+            self.__enemyGroup.update()
 
             #if pygame.sprite.spritecollide(self.__player, self.__doorGroup, True) and not self.__change_map:
                 #    self.__level.next_map = True

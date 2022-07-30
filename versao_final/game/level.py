@@ -3,7 +3,7 @@ import json
 from game.map_objects.block import Block
 from game.map_objects.door import Door
 from game.entity.player import Player
-
+from game.entity.enemy import Enemy
 class Level:
     def __init__(self,
 
@@ -48,12 +48,13 @@ class Level:
                     Door((x,y),[self.__doorGroup])
                 if col == 'P':
                     self.__player.rect = pygame.Rect(x, y, 20, 50)
-
+                if col == 'E':
+                    Enemy((x,y), [self.__enemyGroup])
     def run(self):
         self.__blockGroup.draw(self.__display_surface)
         self.__doorGroup.draw(self.__display_surface)
         self.__object_group.draw(self.__display_surface)
-
+        self.__enemyGroup.draw(self.__display_surface)
     
     @property
     def next_map(self):
