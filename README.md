@@ -1,6 +1,6 @@
 # BaldRun_Game
 
-https://github.com/Diego-Azevedo/BaldRun_Game/assets/69559167/4bea76c9-6d93-405a-b7f3-1304ac6527e5
+https://github.com/INE-UFSC/projeto-final-grupo-2-22-1/assets/69559167/9e724c3f-eedc-4373-99cc-8abaeee0b239
 
 # Sobre o projeto
 
